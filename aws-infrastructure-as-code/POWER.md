@@ -1,5 +1,5 @@
 ---
-name: "aws-iac"
+name: "aws-infrastructure-as-code"
 displayName: "Build AWS infrastructure with CDK and CloudFormation"
 description: "Generate well-architected AWS infrastructure with CDK and CloudFormation - access latest documentation, validate templates, and troubleshoot deployments"
 keywords: ["aws", "cdk", "cloudformation", "troubleshoot", "validate", "compliance", "cfn-lint", "cfn-guard", "infrastructure", "iac", "template", "stack", "construct", "resource", "deployment"]
