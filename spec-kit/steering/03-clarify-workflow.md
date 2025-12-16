@@ -87,6 +87,43 @@ Present EXACTLY ONE question at a time.
 
 **For multiple-choice questions**:
 
+**IMPORTANT**: You MUST use the `userInput` tool to present multiple-choice questions. This renders clickable buttons for the user instead of plain text.
+
+**Tool call format**:
+
+```xml
+<tool_use>
+<name>userInput</name>
+<parameters>
+<reason>clarification</reason>
+<question>[Question text with **Why This Matters** explanation]</question>
+<options>[{"title": "A - [Option A]", "description": "[Impact]", "recommended": true}, {"title": "B - [Option B]", "description": "[Impact]"}, {"title": "C - [Option C]", "description": "[Impact]"}, {"title": "Other", "description": "Provide your own answer"}]</options>
+</parameters>
+</tool_use>
+```
+
+**Example**:
+
+```xml
+<tool_use>
+<name>userInput</name>
+<parameters>
+<reason>clarification</reason>
+<question>**Question:** How should the system limit team concurrent execution count?
+
+**Why This Matters**: Concurrency limits directly impact system stability, resource utilization, and user experience during peak loads.</question>
+<options>[{"title": "A - No limit", "description": "Allow all teams to execute simultaneously"}, {"title": "B - Limit to 5", "description": "Maximum 5 teams executing concurrently"}, {"title": "C - Dynamic adjustment", "description": "Adjust concurrency based on system resources", "recommended": true}, {"title": "Other", "description": "Provide your own answer"}]</options>
+</parameters>
+</tool_use>
+```
+
+**Key points**:
+- Plain text options (e.g., "1. Option A  2. Option B") will NOT render as clickable buttons
+- You MUST output a tool call in the format above for interactive selection
+- The `recommended: true` option will be highlighted in the UI
+
+**Fallback format** (if userInput tool is unavailable):
+
 ```markdown
 **Question**: [The specific question]
 
