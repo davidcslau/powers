@@ -7,7 +7,7 @@ Documentation is available at https://kiro.dev/docs/powers/
 ## Available powers
 
 ### aurora-dsql
-**Deploy a distributed SQL database on AWS** - PostgreSQL-compatible serverless distributed SQL database with Aurora DSQL - manage schemas, execute queries, and handle migrations with DSQL-specific constraints.
+**Build a database with Aurora DSQL** - Build and deploy a PostgreSQL-compatible serverless distributed SQL database with Aurora DSQL - manage schemas, execute queries, and handle migrations with DSQL-specific constraints.
 
 **MCP Servers:** aurora-dsql, aws-core (optional)
 
@@ -31,6 +31,13 @@ Documentation is available at https://kiro.dev/docs/powers/
 **Build infrastructure on AWS** - Build AWS infrastructure with CDK in Python following AWS Well-Architected framework best practices.
 
 **MCP Servers:** awspricing, awsknowledge, awsapi, context7, fetch
+
+---
+
+### cloudwatch
+**AWS CloudWatch Observability** - Query and analyze metrics, logs and alarms from AWS CloudWatch for troubleshooting and root cause analysis.
+
+**MCP Servers:** awslabs.cloudwatch-mcp-server
 
 ---
 
