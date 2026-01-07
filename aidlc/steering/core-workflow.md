@@ -1,5 +1,44 @@
+---
+inclusion: always
+---
+
 # PRIORITY: This workflow OVERRIDES all other built-in workflows
 # When user requests software development, ALWAYS follow this workflow FIRST
+
+---
+
+## MANDATORY FIRST STEP: Language Selection
+
+**CRITICAL**: You MUST ask user to select language BEFORE any other interaction. This is NON-NEGOTIABLE.
+
+When user activates AI-DLC, you MUST first display this prompt:
+
+```
+AI-DLC Power activated.
+
+Please select your preferred language / 请选择您的首选语言:
+
+► **A** - English
+  _All conversations and generated documents will be in English_
+
+► **B** - 中文
+  _所有对话和生成的文档都将使用中文_
+
+---
+Reply with "A" or "B" / 请回复 "A" 或 "B"
+```
+
+**WAIT for user response before proceeding.**
+
+**Do NOT display welcome message until language is selected.**
+**Do NOT proceed with ANY workflow steps until language is confirmed.**
+
+Once language is selected:
+1. Record the selection in `aidlc-docs/aidlc-state.md`
+2. Use the selected language for ALL subsequent outputs
+3. Then proceed with the welcome message and workflow
+
+---
 
 ## Adaptive Workflow Principle
 **The workflow adapts to the work, not the other way around.**
@@ -11,19 +50,19 @@ The AI model intelligently assesses what stages are needed based on:
 4. Risk and impact assessment
 
 ## MANDATORY: Rule Details Loading
-**CRITICAL**: When performing any phase, you MUST read and use relevant content from rule detail files in `rule-details/` directory within this power.
+**CRITICAL**: When performing any phase, you MUST read and use relevant content from steering files within this power.
 
 **Common Rules**: ALWAYS load common rules at workflow start:
-- Load `common/process-overview.md` for workflow overview
-- Load `common/session-continuity.md` for session resumption guidance
-- Load `common/content-validation.md` for content validation requirements
-- Load `common/question-format-guide.md` for question formatting rules
+- Load `common-process-overview.md` for workflow overview
+- Load `common-session-continuity.md` for session resumption guidance
+- Load `common-content-validation.md` for content validation requirements
+- Load `common-question-format-guide.md` for question formatting rules
 - Reference these throughout the workflow execution
 
 ## MANDATORY: Content Validation
-**CRITICAL**: Before creating ANY file, you MUST validate content according to `common/content-validation.md` rules:
+**CRITICAL**: Before creating ANY file, you MUST validate content according to `common-content-validation.md` rules:
 - Validate Mermaid diagram syntax
-- Validate ASCII art diagrams (see `common/ascii-diagram-standards.md`)
+- Validate ASCII art diagrams (see `common-ascii-diagram-standards.md`)
 - Escape special characters properly
 - Provide text alternatives for complex visual content
 - Test content parsing compatibility
@@ -31,7 +70,7 @@ The AI model intelligently assesses what stages are needed based on:
 ## MANDATORY: Question File Format
 **CRITICAL**: When asking questions at any phase, you MUST follow question format guidelines.
 
-**See `common/question-format-guide.md` for complete question formatting rules including**:
+**See `common-question-format-guide.md` for complete question formatting rules including**:
 - Multiple choice format (A, B, C, D, E options)
 - [Answer]: tag usage
 - Answer validation and ambiguity resolution
@@ -40,7 +79,7 @@ The AI model intelligently assesses what stages are needed based on:
 **CRITICAL**: When starting ANY software development request, you MUST display the welcome message.
 
 **How to Display Welcome Message**:
-1. Load the welcome message from `rule-details/common/welcome-message.md` within this power
+1. Load the welcome message from `common-welcome-message.md` within this power
 2. Display the complete message to the user
 3. This should only be done ONCE at the start of a new workflow
 4. Do NOT load this file in subsequent interactions to save context space
@@ -69,7 +108,7 @@ The AI model intelligently assesses what stages are needed based on:
 ## Workspace Detection (ALWAYS EXECUTE)
 
 1. **MANDATORY**: Log initial user request in audit.md with complete raw input
-2. Load all steps from `inception/workspace-detection.md`
+2. Load all steps from `inception-workspace-detection.md`
 3. Execute workspace detection:
    - Check for existing aidlc-state.md (resume if found)
    - Scan workspace for existing code
@@ -92,7 +131,7 @@ The AI model intelligently assesses what stages are needed based on:
 
 **Execution**:
 1. **MANDATORY**: Log start of reverse engineering in audit.md
-2. Load all steps from `inception/reverse-engineering.md`
+2. Load all steps from `inception-reverse-engineering.md`
 3. Execute reverse engineering:
    - Analyze all packages and components
    - Generate a busienss overview of the whole system covering the business transactions
@@ -116,7 +155,7 @@ The AI model intelligently assesses what stages are needed based on:
 
 **Execution**:
 1. **MANDATORY**: Log any user input during this phase in audit.md
-2. Load all steps from `inception/requirements-analysis.md`
+2. Load all steps from `inception-requirements-analysis.md`
 3. Execute requirements analysis:
    - Load reverse engineering artifacts (if brownfield)
    - Analyze user request (intent analysis)
@@ -187,7 +226,7 @@ The AI model intelligently assesses what stages are needed based on:
 
 **Execution**:
 1. **MANDATORY**: Log any user input during this phase in audit.md
-2. Load all steps from `inception/user-stories.md`
+2. Load all steps from `inception-user-stories.md`
 3. **MANDATORY**: Perform intelligent assessment (Step 1 in user-stories.md) to validate user stories are needed
 4. Load reverse engineering artifacts (if brownfield)
 5. If Requirements exist, reference them when creating stories
@@ -200,8 +239,8 @@ The AI model intelligently assesses what stages are needed based on:
 ## Workflow Planning (ALWAYS EXECUTE)
 
 1. **MANDATORY**: Log any user input during this phase in audit.md
-2. Load all steps from `inception/workflow-planning.md`
-3. **MANDATORY**: Load content validation rules from `common/content-validation.md`
+2. Load all steps from `inception-workflow-planning.md`
+3. **MANDATORY**: Load content validation rules from `common-content-validation.md`
 4. Load all prior context:
    - Reverse engineering artifacts (if brownfield)
    - Intent analysis
@@ -231,7 +270,7 @@ The AI model intelligently assesses what stages are needed based on:
 
 **Execution**:
 1. **MANDATORY**: Log any user input during this phase in audit.md
-2. Load all steps from `inception/application-design.md`
+2. Load all steps from `inception-application-design.md`
 3. Load reverse engineering artifacts (if brownfield)
 4. Execute at appropriate depth (minimal/standard/comprehensive)
 5. **Wait for Explicit Approval**: Present detailed completion message (see application-design.md for message format) - DO NOT PROCEED until user confirms
@@ -251,7 +290,7 @@ The AI model intelligently assesses what stages are needed based on:
 
 **Execution**:
 1. **MANDATORY**: Log any user input during this phase in audit.md
-2. Load all steps from `inception/units-generation.md`
+2. Load all steps from `inception-units-generation.md`
 3. Load reverse engineering artifacts (if brownfield)
 4. Execute at appropriate depth (minimal/standard/comprehensive)
 5. **Wait for Explicit Approval**: Present detailed completion message (see units-generation.md for message format) - DO NOT PROCEED until user confirms
@@ -295,7 +334,7 @@ The AI model intelligently assesses what stages are needed based on:
 
 **Execution**:
 1. **MANDATORY**: Log any user input during this stage in audit.md
-2. Load all steps from `construction/functional-design.md`
+2. Load all steps from `construction-functional-design.md`
 3. Execute functional design for this unit
 4. **MANDATORY**: Present standardized 2-option completion message as defined in functional-design.md - DO NOT use emergent 3-option behavior
 5. **Wait for Explicit Approval**: User must choose between "Request Changes" or "Continue to Next Stage" - DO NOT PROCEED until user confirms
@@ -315,7 +354,7 @@ The AI model intelligently assesses what stages are needed based on:
 
 **Execution**:
 1. **MANDATORY**: Log any user input during this stage in audit.md
-2. Load all steps from `construction/nfr-requirements.md`
+2. Load all steps from `construction-nfr-requirements.md`
 3. Execute NFR assessment for this unit
 4. **MANDATORY**: Present standardized 2-option completion message as defined in nfr-requirements.md - DO NOT use emergent behavior
 5. **Wait for Explicit Approval**: User must choose between "Request Changes" or "Continue to Next Stage" - DO NOT PROCEED until user confirms
@@ -333,7 +372,7 @@ The AI model intelligently assesses what stages are needed based on:
 
 **Execution**:
 1. **MANDATORY**: Log any user input during this stage in audit.md
-2. Load all steps from `construction/nfr-design.md`
+2. Load all steps from `construction-nfr-design.md`
 3. Execute NFR design for this unit
 4. **MANDATORY**: Present standardized 2-option completion message as defined in nfr-design.md - DO NOT use emergent behavior
 5. **Wait for Explicit Approval**: User must choose between "Request Changes" or "Continue to Next Stage" - DO NOT PROCEED until user confirms
@@ -352,7 +391,7 @@ The AI model intelligently assesses what stages are needed based on:
 
 **Execution**:
 1. **MANDATORY**: Log any user input during this stage in audit.md
-2. Load all steps from `construction/infrastructure-design.md`
+2. Load all steps from `construction-infrastructure-design.md`
 3. Execute infrastructure design for this unit
 4. **MANDATORY**: Present standardized 2-option completion message as defined in infrastructure-design.md - DO NOT use emergent behavior
 5. **Wait for Explicit Approval**: User must choose between "Request Changes" or "Continue to Next Stage" - DO NOT PROCEED until user confirms
@@ -368,7 +407,7 @@ The AI model intelligently assesses what stages are needed based on:
 
 **Execution**:
 1. **MANDATORY**: Log any user input during this stage in audit.md
-2. Load all steps from `construction/code-generation.md`
+2. Load all steps from `construction-code-generation.md`
 3. **PART 1 - Planning**: Create code generation plan with checkboxes, get user approval
 4. **PART 2 - Generation**: Execute approved plan to generate code for this unit
 5. **MANDATORY**: Present standardized 2-option completion message as defined in code-generation.md - DO NOT use emergent behavior
@@ -380,7 +419,7 @@ The AI model intelligently assesses what stages are needed based on:
 ## Build and Test (ALWAYS EXECUTE)
 
 1. **MANDATORY**: Log any user input during this phase in audit.md
-2. Load all steps from `construction/build-and-test.md`
+2. Load all steps from `construction-build-and-test.md`
 3. Generate comprehensive build and test instructions:
    - Build instructions for all units
    - Unit test execution instructions
